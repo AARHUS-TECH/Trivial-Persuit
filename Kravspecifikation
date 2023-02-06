@@ -1,1 +1,32 @@
 
+Krav spicifikation: 
+
+Backend 
+
+Frontend 
+•	Timing fx.10-15 sec 
+Must display the next quation in zero second or by clicking the next button.
+Time limit for answering a quation. 
+Players can keep track of theire score on the screen.
+All quations should randomly generate.
+
+Admin Rolle: 
+•	Can sign in as admin. 
+Form for creating quations and setup time. 
+Categories: Each quations should be one of the 6 categories
+Can view a list of quations.
+Can do Crud operations.
+
+Functionality
+-	Admin and player login
+-	The webpage should be able to redirect the user based on their rolle.
+-	The game includes a board, playing pieces, question cards.
+-	The player who has the most point by answering faster will win.
+-	Earn more point for answering fast. 
+
+Teknology
+-	Php
+-	Javascript
+-	Html & Css
+-	Mysql/MyAdmin  
+
