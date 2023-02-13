@@ -24,7 +24,7 @@ $result = $conn->query($sql);
 
     <div class="container">
 
-        <h2>users</h2>
+        <h2>Trivialpursuit</h2>
 
 <table class="table">
 
@@ -32,17 +32,15 @@ $result = $conn->query($sql);
 
         <tr>
 
-        <th>ID</th>
+        <th>Category nummer ID</>
 
-        <th>First Name</th>
+        <th>Question</th>
 
-        <th>Last Name</th>
+        <th>Answer</th>
 
-        <th>Email</th>
+        <th>DateCreated</th>
 
-        <th>Gender</th>
-
-        <th>Action</th>
+        <th>CreatedBy</th>
 
     </tr>
 
