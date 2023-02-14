@@ -36,7 +36,7 @@ $result = $conn->query($sql);
     <td><?php echo $row['Question']; ?></td>
     <td><?php echo $row['Answer']; ?></td>
     <td><?php echo $row['DateCreated']; ?></td>
-    <td><?php echo $row['role']; ?></td>
+    <td><?php echo $row['Role']; ?></td>
     <td><a class="btn btn-info" href="update.php?Id=<?php echo $row['Id']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" href="delete.php?Id=<?php echo $row['Id']; ?>">Delete</a></td>
  </tr>                       
  <?php
@@ -48,7 +48,6 @@ $result = $conn->query($sql);
 </div> 
 </body>
 </html>
-
 
 
 
