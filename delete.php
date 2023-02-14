@@ -6,7 +6,7 @@ if (isset($_GET['Id'])) {
 
     $questions_Id = $_GET['Id'];
 
-    $sql = "DELETE FROM `questions` WHERE Id`='questions_Id'";
+    $sql = "DELETE FROM `questions` WHERE `Id`='$questions_Id'";
 
      $result = $conn->query($sql);
 

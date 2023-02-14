@@ -4,19 +4,19 @@ include "config.php";
 
     if (isset($_POST['update'])) {
 
-        $firstname = $_POST['firstname'];
+        $questions_Id = $_POST['Id']; 
 
-        $user_id = $_POST['user_id'];
+        $Category = $_POST['Category'];
 
-        $lastname = $_POST['lastname'];
+        $Question = $_POST['Question'];
 
-        $email = $_POST['email'];
+        $Answer = $_POST['Answer'];
 
-        $password = $_POST['password'];
+        $DateCreated = $_POST['DateCreated'];
 
-        $gender = $_POST['gender']; 
+        $CreatedBy = $_POST['CreatedBy'];
 
-        $sql = "UPDATE `users` SET `firstname`='$firstname',`lastname`='$lastname',`email`='$email',`password`='$password',`gender`='$gender' WHERE `id`='$user_id'"; 
+        $sql = "UPDATE `questions` SET `Category`='$Category', `Question`='$Question',`Answer`='$Answer',`DateCreated`='$DateCreated',`CreatedBy`='$CreatedBy' WHERE `Id`='$questions_Id'"; 
 
         $result = $conn->query($sql); 
 
@@ -32,11 +32,13 @@ include "config.php";
 
     } 
 
-if (isset($_GET['id'])) {
+    
 
-    $user_id = $_GET['id']; 
+if (isset($_GET['Id'])) {
 
-    $sql = "SELECT * FROM `users` WHERE `id`='$user_id'";
+    $questions_Id = $_GET['Id']; 
+
+    $sql = "SELECT * FROM `questions` WHERE `Id`='questions_Id'";
 
     $result = $conn->query($sql); 
 
@@ -44,17 +46,17 @@ if (isset($_GET['id'])) {
 
         while ($row = $result->fetch_assoc()) {
 
-            $first_name = $row['firstname'];
+            $Category = $_POST['Category'];
 
-            $lastname = $row['lastname'];
+            $Question = $row['Question'];
 
-            $email = $row['email'];
+            $Answer = $row['Answer'];
 
-            $password  = $row['password'];
+            $DateCreated = $row['DateCreated'];
 
-            $gender = $row['gender'];
+            $CreatedBy  = $row['CreatedBy'];
 
-            $id = $row['id'];
+            $Id = $row['Id'];
 
         } 
 
@@ -68,39 +70,37 @@ if (isset($_GET['id'])) {
 
             <legend>Personal information:</legend>
 
-            First name:<br>
+            Category :<br>
 
-            <input type="text" name="firstname" value="<?php echo $first_name; ?>">
+            <input type="text" name="Category" value="<?php echo $Category; ?>">
 
-            <input type="hidden" name="user_id" value="<?php echo $id; ?>">
+            <input type="hidden" name="Id" value="<?php echo $questions_Id; ?>">
 
-            <br>
 
-            Last name:<br>
+            Question :<br>
 
-            <input type="text" name="lastname" value="<?php echo $lastname; ?>">
-
-            <br>
-
-            Email:<br>
-
-            <input type="email" name="email" value="<?php echo $email; ?>">
+            <input type="text" name="Question" value="<?php echo $Question; ?>">
 
             <br>
 
-            Password:<br>
+            Answer:<br>
 
-            <input type="password" name="password" value="<?php echo $password; ?>">
+            <input type="text" name="Answer" value="<?php echo $Answer; ?>">
 
             <br>
 
-            Gender:<br>
+            DateCreated:<br>
 
-            <input type="radio" name="gender" value="Male" <?php if($gender == 'Male'){ echo "checked";} ?> >Male
+            <input type="text" name="DateCreated" value="<?php echo $DateCreated; ?>">
 
-            <input type="radio" name="gender" value="Female" <?php if($gender == 'Female'){ echo "checked";} ?>>Female
+            <br>
 
-            <br><br>
+            CreatedBy:<br>
+
+            <input type="text" name="CreatedBy" value="<?php echo $CreatedBy; ?>">
+
+            <br>
+
 
             <input type="submit" value="Update" name="update">
 
@@ -117,9 +117,6 @@ if (isset($_GET['id'])) {
     } else{ 
 
         header('Location: view.php');
-
     } 
-
 }
-
 ?> 
