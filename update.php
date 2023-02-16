@@ -1,52 +1,54 @@
-<?php 
+<?php
 
 include "config.php";
 
-    if (isset($_POST['update'])) {
 
-        $questions_Id = $_POST['Id']; 
+if (isset($_POST['update'])) {
 
-        $Category = $_POST['Category'];
+    $questions_Id = $_POST['Id'];
 
-        $Question = $_POST['Question'];
+    $Category = $_POST['Category'];
 
-        $Answer = $_POST['Answer'];
+    $Question = $_POST['Question'];
 
-        $DateCreated = $_POST['DateCreated'];
+    $Answer = $_POST['Answer'];
 
-        $CreatedBy = $_POST['CreatedBy'];
+    $DateCreated = $_POST['DateCreated'];
 
-        $sql = "UPDATE `questions` SET `Category`='$Category', `Question`='$Question',`Answer`='$Answer',`DateCreated`='$DateCreated',`CreatedBy`='$CreatedBy' WHERE `Id`='$questions_Id'"; 
+    $CreatedBy = $_POST['CreatedBy'];
 
-        $result = $conn->query($sql); 
+    $sql = "UPDATE `questions` SET `Category`='$Category', `Question`='$Question',`Answer`='$Answer',`DateCreated`='$DateCreated',`CreatedBy`='$CreatedBy' WHERE `Id`='$questions_Id'";
 
-        if ($result == TRUE) {
+    $result = $conn->query($sql);
 
-            echo "Record updated successfully.";
+    if ($result == TRUE) {
 
-        }else{
+        echo "Record updated successfully.";
 
-            echo "Error:" . $sql . "<br>" . $conn->error;
 
-        }
+    } else {
 
-    } 
+        echo "Error:" . $sql . "<br>" . $conn->error;
 
-    
+    }
+
+}
+
+
 
 if (isset($_GET['Id'])) {
 
-    $questions_Id = $_GET['Id']; 
+    $questions_Id = $_GET['Id'];
 
-    $sql = "SELECT * FROM `questions` WHERE `Id`='questions_Id'";
+    $sql = "SELECT * FROM `questions` WHERE `Id`='$questions_Id'";
 
-    $result = $conn->query($sql); 
+    $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {        
+    if ($result->num_rows > 0) {
 
         while ($row = $result->fetch_assoc()) {
 
-            $Category = $_POST['Category'];
+            $Category = $row['Category'];
 
             $Question = $row['Question'];
 
@@ -54,69 +56,69 @@ if (isset($_GET['Id'])) {
 
             $DateCreated = $row['DateCreated'];
 
-            $CreatedBy  = $row['CreatedBy'];
+            $CreatedBy = $row['CreatedBy'];
 
             $Id = $row['Id'];
 
-        } 
+        }
 
-    ?>
+        ?>
 
         <h2>User Update Form</h2>
 
         <form action="" method="post">
 
-          <fieldset>
+            <fieldset>
 
-            <legend>Personal information:</legend>
+                <legend>Question information:</legend>
 
-            Category :<br>
+                Category :<br>
 
-            <input type="text" name="Category" value="<?php echo $Category; ?>">
+                <input type="text" name="Category" value="<?php echo $Category; ?>">
 
-            <input type="hidden" name="Id" value="<?php echo $questions_Id; ?>">
-
-
-            Question :<br>
-
-            <input type="text" name="Question" value="<?php echo $Question; ?>">
-
-            <br>
-
-            Answer:<br>
-
-            <input type="text" name="Answer" value="<?php echo $Answer; ?>">
-
-            <br>
-
-            DateCreated:<br>
-
-            <input type="text" name="DateCreated" value="<?php echo $DateCreated; ?>">
-
-            <br>
-
-            CreatedBy:<br>
-
-            <input type="text" name="CreatedBy" value="<?php echo $CreatedBy; ?>">
-
-            <br>
+                <input type="hidden" name="Id" value="<?php echo $questions_Id; ?>">
 
 
-            <input type="submit" value="Update" name="update">
+                Question :<br>
 
-          </fieldset>
+                <input type="text" name="Question" value="<?php echo $Question; ?>">
 
-        </form> 
+                <br>
+
+                Answer:<br>
+
+                <input type="text" name="Answer" value="<?php echo $Answer; ?>">
+
+                <br>
+
+                DateCreated:<br>
+
+                <input type="text" name="DateCreated" value="<?php echo $DateCreated; ?>">
+
+                <br>
+
+                CreatedBy:<br>
+
+                <input type="text" name="CreatedBy" value="<?php echo $CreatedBy; ?>">
+
+                <br>
+
+
+                <input type="submit" value="Update" name="update">
+
+            </fieldset>
+
+        </form>
 
         </body>
 
-        </html> 
+        </html>
 
     <?php
 
-    } else{ 
+    } else {
 
         header('Location: view.php');
-    } 
+    }
 }
-?> 
+?>
