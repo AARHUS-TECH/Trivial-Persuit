@@ -68,8 +68,8 @@ include 'config.php'; ?>
                         <td class="tablebody">
                             <?php echo $row['Role']; ?>
                         </td>
-                        <td><a class="btn btn-info" href="update.php?Id=<?php echo $row['Id']; ?>">Edit</a></td>
-                        <td><a class="btn btn-danger" href="delete.php?Id=<?php echo $row['Id']; ?>">Delete</a></td>
+                        <td><a class="btn btn-edit" href="update.php?Id=<?php echo $row['Id']; ?>">Edit</a></td>
+                        <td><a class="btn btn-delete" href="delete.php?Id=<?php echo $row['Id']; ?>">Delete</a></td>
                     </tr>
                     <?php
                 }
