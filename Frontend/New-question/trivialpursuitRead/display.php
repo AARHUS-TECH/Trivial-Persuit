@@ -1,11 +1,5 @@
 <?php
-include '../Connection/config.php'; ?>
-
-$sql = "SELECT category_questions.Name, questions.Question, questions.Answer, questions.DateCreated, role.Role,
-questions.Id FROM category_questions, questions, role WHERE questions.Category = category_questions.Id AND role.Id =
-questions.CreatedBy;";
-
-$result = $conn->query($sql);
+include 'config.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +25,7 @@ $result = $conn->query($sql);
     <div class="banner">
         <div class="navbar">
             <ul>
-                <li><a href="#">BACK</a></li>
+                <li><a href="/Trivial-Pursuit-main/Frontend/Start-Menu/index.html">BACK</a></li>
             </ul>
         </div>
         <div class="container">
@@ -47,23 +41,37 @@ $result = $conn->query($sql);
                 </thead>
         </div>
         <tbody>
+
             <?php
 
-            $result = mysqli_query($conn, $sql);
-            if ($result) {
-                while ($row = mysqli_fetch_assoc($result)) { // while loop
-                    $Category = $row['Category'];
-                    $Question = $row['Question'];
-                    $Answer = $row['Answer'];
-                    $DateCreated = $row['DateCreated'];
-                    $CreatedBy = $row['CreatedBy'];
-                    echo '<tr>
-                    <th class="tablebody" scope="row">' . $Category . '</th>
-                    <th class="tablebody" scope="row">' . $Question . '</th>
-                    <th class="tablebody" scope="row">' . $Answer . '</th>
-                    <th class="tablebody" scope="row">' . $DateCreated . '</th>
-                    <th class="tablebody" scope="row">' . $CreatedBy . '</th>
-                    </tr>';
+            $sql = "SELECT category_questions.Name, questions.Question, questions.Answer, questions.DateCreated, role.Role,
+            questions.Id FROM category_questions, questions, role WHERE questions.Category = category_questions.Id AND role.Id =
+                questions.CreatedBy;";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    ?>
+                    <tr>
+                        <td class="tablebody">
+                            <?php echo $row['Name']; ?>
+                        </td>
+                        <td class="tablebody">
+                            <?php echo $row['Question']; ?>
+                        </td>
+                        <td class="tablebody">
+                            <?php echo $row['Answer']; ?>
+                        </td>
+                        <td class="tablebody">
+                            <?php echo $row['DateCreated']; ?>
+                        </td>
+                        <td class="tablebody">
+                            <?php echo $row['Role']; ?>
+                        </td>
+                        <td><a class="btn btn-info" href="update.php?Id=<?php echo $row['Id']; ?>">Edit</a></td>
+                        <td><a class="btn btn-danger" href="delete.php?Id=<?php echo $row['Id']; ?>">Delete</a></td>
+                    </tr>
+                    <?php
                 }
             }
             ?>

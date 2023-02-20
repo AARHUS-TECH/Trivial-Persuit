@@ -33,13 +33,13 @@
     font-weight: 100;
     line-height: 25px;
 }
-.test{
+.tablehead{
     text-decoration: none;
     color: white;
     text-transform: uppercase;
     font-size: 20px;
 }
-.test2{
+.tablebody{
     text-decoration: none;
     color: white;
     text-transform: none;
