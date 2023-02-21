@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 31, 2023 at 03:31 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Vært: localhost:3306
+-- Genereringstid: 21. 02 2023 kl. 13:32:08
+-- Serverversion: 8.0.32-0ubuntu0.22.04.2
+-- PHP-version: 8.1.2-1ubuntu2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,58 +24,64 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category_questions`
+-- Struktur-dump for tabellen `category_questions`
 --
 
 CREATE TABLE `category_questions` (
-  `Id` int(11) NOT NULL,
-  `Name` varchar(100) NOT NULL
+  `Id` int NOT NULL,
+  `Name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `category_questions`
+-- Data dump for tabellen `category_questions`
 --
 
 INSERT INTO `category_questions` (`Id`, `Name`) VALUES
-(1, 'Centrale netværksbegreber');
+(1, 'Centrale netværksbegreber'),
+(3, 'CLI-kommandoer'),
+(4, 'IPv6-relateret'),
+(5, 'Specialiserede netværksprotokoller/teknologier'),
+(6, 'TCP/UDP'),
+(7, 'Diverse Netværk');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category_shared`
+-- Struktur-dump for tabellen `category_shared`
 --
 
 CREATE TABLE `category_shared` (
-  `Id` int(11) NOT NULL,
-  `User_Id` int(11) NOT NULL,
-  `Category_Id` int(11) NOT NULL,
+  `Id` int NOT NULL,
+  `User_Id` int NOT NULL,
+  `Category_Id` int NOT NULL,
   `Owner` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `category_shared`
+-- Data dump for tabellen `category_shared`
 --
 
 INSERT INTO `category_shared` (`Id`, `User_Id`, `Category_Id`, `Owner`) VALUES
-(1, 1, 1, 1);
+(1, 1, 1, 1),
+(2, 2, 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Struktur-dump for tabellen `questions`
 --
 
 CREATE TABLE `questions` (
-  `Id` int(11) NOT NULL,
-  `Category` int(10) NOT NULL,
-  `Question` varchar(200) NOT NULL,
-  `Answer` varchar(200) NOT NULL,
+  `Id` int NOT NULL,
+  `Category` int NOT NULL,
+  `Question` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `Answer` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `DateCreated` date NOT NULL,
-  `CreatedBy` int(11) NOT NULL
+  `CreatedBy` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `questions`
+-- Data dump for tabellen `questions`
 --
 
 INSERT INTO `questions` (`Id`, `Category`, `Question`, `Answer`, `DateCreated`, `CreatedBy`) VALUES
@@ -84,16 +90,16 @@ INSERT INTO `questions` (`Id`, `Category`, `Question`, `Answer`, `DateCreated`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role`
+-- Struktur-dump for tabellen `role`
 --
 
 CREATE TABLE `role` (
-  `Id` int(11) NOT NULL,
-  `Role` varchar(30) NOT NULL
+  `Id` int NOT NULL,
+  `Role` varchar(30) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `role`
+-- Data dump for tabellen `role`
 --
 
 INSERT INTO `role` (`Id`, `Role`) VALUES
@@ -103,19 +109,19 @@ INSERT INTO `role` (`Id`, `Role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur-dump for tabellen `user`
 --
 
 CREATE TABLE `user` (
-  `Id` int(11) NOT NULL,
-  `Username` varchar(30) NOT NULL,
-  `Password` mediumtext NOT NULL,
-  `Role` int(11) NOT NULL,
-  `Email` varchar(200) NOT NULL
+  `Id` int NOT NULL,
+  `Username` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `Password` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
+  `Role` int NOT NULL,
+  `Email` varchar(200) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Data dump for tabellen `user`
 --
 
 INSERT INTO `user` (`Id`, `Username`, `Password`, `Role`, `Email`) VALUES
@@ -123,17 +129,17 @@ INSERT INTO `user` (`Id`, `Username`, `Password`, `Role`, `Email`) VALUES
 (2, 'TestStudent', 'SKP2020!', 2, '');
 
 --
--- Indexes for dumped tables
+-- Begrænsninger for dumpede tabeller
 --
 
 --
--- Indexes for table `category_questions`
+-- Indeks for tabel `category_questions`
 --
 ALTER TABLE `category_questions`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `category_shared`
+-- Indeks for tabel `category_shared`
 --
 ALTER TABLE `category_shared`
   ADD PRIMARY KEY (`Id`),
@@ -141,7 +147,7 @@ ALTER TABLE `category_shared`
   ADD KEY `User_ID_Shared` (`User_Id`);
 
 --
--- Indexes for table `questions`
+-- Indeks for tabel `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`Id`),
@@ -149,72 +155,72 @@ ALTER TABLE `questions`
   ADD KEY `CreatedBy_User` (`CreatedBy`);
 
 --
--- Indexes for table `role`
+-- Indeks for tabel `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `user`
+-- Indeks for tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `Role_ID_User` (`Role`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Brug ikke AUTO_INCREMENT for slettede tabeller
 --
 
 --
--- AUTO_INCREMENT for table `category_questions`
+-- Tilføj AUTO_INCREMENT i tabel `category_questions`
 --
 ALTER TABLE `category_questions`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `category_shared`
+-- Tilføj AUTO_INCREMENT i tabel `category_shared`
 --
 ALTER TABLE `category_shared`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `questions`
+-- Tilføj AUTO_INCREMENT i tabel `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `role`
+-- Tilføj AUTO_INCREMENT i tabel `role`
 --
 ALTER TABLE `role`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user`
+-- Tilføj AUTO_INCREMENT i tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Begrænsninger for dumpede tabeller
 --
 
 --
--- Constraints for table `category_shared`
+-- Begrænsninger for tabel `category_shared`
 --
 ALTER TABLE `category_shared`
   ADD CONSTRAINT `Category_ID_shared` FOREIGN KEY (`Category_Id`) REFERENCES `category_questions` (`Id`),
   ADD CONSTRAINT `User_ID_Shared` FOREIGN KEY (`User_Id`) REFERENCES `user` (`Id`);
 
 --
--- Constraints for table `questions`
+-- Begrænsninger for tabel `questions`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `Category_ID` FOREIGN KEY (`Category`) REFERENCES `category_questions` (`Id`),
   ADD CONSTRAINT `CreatedBy_User` FOREIGN KEY (`CreatedBy`) REFERENCES `user` (`Id`);
 
 --
--- Constraints for table `user`
+-- Begrænsninger for tabel `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `Role_ID_User` FOREIGN KEY (`Role`) REFERENCES `role` (`Id`);
