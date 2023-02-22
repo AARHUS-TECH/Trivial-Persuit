@@ -63,53 +63,86 @@ if (isset($_GET['Id'])) {
         }
 
         ?>
+        <!DOCTYPE html>
+        <html lang="en">
 
-        <h2>User Update Form</h2>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>edit</title>
+            <link rel="stylesheet" href="style.css">
+        </head>
 
-        <form action="" method="post">
-
-            <fieldset>
-
-                <legend>Question information:</legend>
-
-                Category :<br>
-
-                <input type="text" name="Category" value="<?php echo $Category; ?>">
-
-                <input type="hidden" name="Id" value="<?php echo $questions_Id; ?>">
+        <body>
+            <div class="banner">
 
 
-                Question :<br>
+                <h2>User Update Form</h2>
 
-                <input type="text" name="Question" value="<?php echo $Question; ?>">
+                <form action="" method="post">
 
-                <br>
+                    <fieldset>
 
-                Answer:<br>
+                        <legend>Question information:</legend>
 
-                <input type="text" name="Answer" value="<?php echo $Answer; ?>">
+                        Category :
 
-                <br>
+                        <br>
 
-                DateCreated:<br>
-
-                <input type="text" name="DateCreated" value="<?php echo $DateCreated; ?>">
-
-                <br>
-
-                CreatedBy:<br>
-
-                <input type="text" name="CreatedBy" value="<?php echo $CreatedBy; ?>">
-
-                <br>
+                        <select name=Category>
+                            <option value="1">Centrale netværksbegreber</option>
+                            <option value="3">CLI-kommandoer</option>
+                            <option value="4">IPv6-relateret</option>
+                            <option value="5">Specialiserede netværksprotokoller/teknologier</option>
+                            <option value="6">TCP/UDP</option>
+                            <option value="7">Diverse Netværk</option>
+                        </select>
 
 
-                <input type="submit" value="Update" name="update">
 
-            </fieldset>
+                        <br>
 
-        </form>
+                        Question :¨
 
+                        <br>
+
+                        <input type="hidden" name="Id" value="<?php echo $questions_Id; ?>">
+
+                        <input type="text" name="Question" value="<?php echo $Question; ?>">
+
+                        <br>
+
+                        Answer:<br>
+
+                        <input type="text" name="Answer" value="<?php echo $Answer; ?>">
+
+                        <br>
+
+                        DateCreated:<br>
+
+                        <input type="text" name="DateCreated" value="<?php echo $DateCreated; ?>">
+
+                        <br>
+
+                        CreatedBy:<br>
+
+                        <input type="text" name="CreatedBy" value="<?php echo $CreatedBy; ?>">
+
+                        <br>
+
+
+                        <input type="submit" value="Update" name="update">
+
+                    </fieldset>
+
+                </form>
+
+                <div class="navbar">
+                    <ul>
+                        <li><a class="button" href="display.php">BACK</a></li>
+                    </ul>
+                </div>
+            </div>
         </body>
 
         </html>
