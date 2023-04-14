@@ -4,12 +4,27 @@ $sql = "SELECT * FROM category_questions, questions,
         role WHERE questions.Category = category_questions.Id
         AND role.Id = questions.CreatedBy
         ORDER BY category_questions.Id,
-        rand() limit 6;";
+        rand();";
 $result = $conn->query($sql);
 
 $Questions = array();
+
 while ($Question = $result->fetch_assoc()) {
-  $Questions[] = $Question;
+  $Category = $Question['Category'];
+  $isDuplicate = false;
+
+  // Check if the category is already present in the $Questions array
+  foreach ($Questions as $q) {
+    if ($q['Category'] == $Category) {
+      $isDuplicate = true;
+      break;
+    }
+  }
+
+  // If the category is not a duplicate, add the question to the $Questions array
+  if (!$isDuplicate) {
+    $Questions[] = $Question;
+  }
 }
 ?>
 
@@ -44,10 +59,15 @@ while ($Question = $result->fetch_assoc()) {
                   <th>Genre</th>
                   <th>Question</th>
                 </tr>
-                <?php foreach ($Questions as $Question) { ?>
+                <?php
+
+                foreach ($Questions as $Question) { ?>
                   <tr>
                     <td>
+                      <!--make so the same category does not appear twice -->
                       <?php echo $Question['Name']; ?>
+
+
                     </td>
                     <td>
                       <?php echo $Question['Question']; ?>
@@ -87,6 +107,7 @@ while ($Question = $result->fetch_assoc()) {
       </div>
     </div>
     <div class="content">
+
       <a href='game.php'><button type="button"><span></span>NEW GAME</button></a>
     </div>
     <script src="cardflip.js"></script>
