@@ -71,11 +71,13 @@ if (isset($_GET['Id'])) {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>edit</title>
+
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" href="style.css">
         </head>
 
         <body>
-            <div class="banner">
+            <div class="update-box">
 
 
                 <h2>User Update Form</h2>
@@ -90,7 +92,7 @@ if (isset($_GET['Id'])) {
 
                         <br>
 
-                        <select name=Category>
+                        <select name=Category class="input">
                             <option value="1">Centrale netværksbegreber</option>
                             <option value="3">CLI-kommandoer</option>
                             <option value="4">IPv6-relateret</option>
@@ -103,36 +105,34 @@ if (isset($_GET['Id'])) {
 
                         <br>
 
-                        Question :¨
+                        Question :
 
                         <br>
 
-                        <input type="hidden" name="Id" value="<?php echo $questions_Id; ?>">
+                        <input type="hidden" name="Id" class="input" value="<?php echo $questions_Id; ?>">
 
-                        <input type="text" name="Question" value="<?php echo $Question; ?>">
+                        <textarea name="Question" class="question-textarea"><?php echo $Question; ?></textarea>
 
                         <br>
 
                         Answer:<br>
 
-                        <input type="text" name="Answer" value="<?php echo $Answer; ?>">
+                        <textarea name="Answer" class="question-textarea"><?php echo $Answer; ?></textarea>
 
-                        <br>
 
-                        DateCreated:<br>
-
-                        <input type="text" name="DateCreated" value="<?php echo $DateCreated; ?>">
-
-                        <br>
-
-                        CreatedBy:<br>
-
-                        <input type="text" name="CreatedBy" value="<?php echo $CreatedBy; ?>">
+                        <input type="hidden" name="DateCreated" value="<?php echo $DateCreated; ?>">
 
                         <br>
 
 
-                        <input type="submit" value="Update" name="update">
+
+                        <input type="hidden" name="CreatedBy" value="<?php echo $CreatedBy; ?>">
+
+                        <br>
+
+
+                        <input type="submit" value="Update" class="btn btn-primary" name="update">
+                        <a class="backbtn" href="display.php">Back</a>
 
                     </fieldset>
 
@@ -140,7 +140,7 @@ if (isset($_GET['Id'])) {
 
                 <div class="navbar">
                     <ul>
-                        <li><a class="button" href="display.php">BACK</a></li>
+                        <li></li>
                     </ul>
                 </div>
             </div>

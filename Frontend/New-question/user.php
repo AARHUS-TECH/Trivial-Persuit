@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 }
 
 date_default_timezone_set('Europe/Copenhagen');
-echo "the current time in Denmark is " . date("h:i:sa");
+
 ?>
 
 <!doctype html>
@@ -56,15 +56,16 @@ echo "the current time in Denmark is " . date("h:i:sa");
 </head>
 
 <body>
-    <div class="banner">
-        <div class="container my-5">
+    <div>
+        <div class="user-box">
             <form method="post">
                 <fieldset>
 
-                    <legend>Category:</legend>
+                    <legend>New Question</legend>
 
                     Category:<br>
-                    <select name=Category>
+                    <select name="Category" class="input">
+                        <option value="0">Select...</option>
                         <option value="1">Centrale netværksbegreber</option>
                         <option value="3">CLI-kommandoer</option>
                         <option value="4">IPv6-relateret</option>
@@ -78,19 +79,20 @@ echo "the current time in Denmark is " . date("h:i:sa");
 
                     Question:<br>
 
-                    <input type="text" name="Question">
+                    <textarea placeholder="Question" class="question-textarea" name="Question"></textarea>
 
                     <br>
 
                     Answer:<br>
 
-                    <input type="text" name="Answer">
+                    <textarea placeholder="Answer" name="Answer" class="question-textarea"></textarea>
 
                     <br>
 
-                    DateCreated:<br>
 
-                    <input type="date" name="DateCreated">
+
+                    <input type="hidden" name="DateCreated" class="input" value="<?php $currentDate = date('Y-m-d');
+                    echo $currentDate; ?>" readonly>
 
                     <br>
 
@@ -102,13 +104,14 @@ echo "the current time in Denmark is " . date("h:i:sa");
 
                     <br><br>
 
-                    <input type="submit" name="submit" value="submit">
+                    <input class="btn btn-primary" type="submit" name="submit" value="submit">
+                    <a class="backbtn" href="display.php">Back</a>
 
                 </fieldset>
             </form>
             <div class="navbar nav-brand">
                 <ul>
-                    <li><a class="button" href="display.php">BACK</a></li>
+                    <li></li>
                 </ul>
             </div>
         </div>

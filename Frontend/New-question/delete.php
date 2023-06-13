@@ -12,7 +12,7 @@ if (isset($_GET['Id'])) {
 
     if ($result == TRUE) {
 
-        echo "Record deleted successfully.";
+        header("Location: display.php");
 
     } else {
 
@@ -25,9 +25,3 @@ if (isset($_GET['Id'])) {
 
 
 ?>
-
-<div class="navbar navbar-brand">
-    <ul>
-        <li><a class="button" href="display.php">BACK</a></li>
-    </ul>
-</div>

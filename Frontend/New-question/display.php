@@ -24,11 +24,10 @@ include 'config.php'; ?>
 <body>
     <div class="banner">
         <div class="navbar">
-            <ul>
-                <li><a href="/Trivial-Pursuit-main/Frontend/Start-Menu/index.html">BACK</a></li>
-            </ul>
+
         </div>
-        <div class="container">
+        <div class="display-box">
+
             <table class="table">
                 <thead>
                     <tr>
@@ -39,47 +38,105 @@ include 'config.php'; ?>
                         <th class="tablehead" scope="col">Created By</th>
                     </tr>
                 </thead>
-        </div>
-        <tbody>
-
-            <?php
-
-            $sql = "SELECT category_questions.Name, questions.Question, questions.Answer, questions.DateCreated, role.Role,
-            questions.Id FROM category_questions, questions, role WHERE questions.Category = category_questions.Id AND role.Id =
-                questions.CreatedBy;";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                        <td class="tablebody">
-                            <?php echo $row['Name']; ?>
-                        </td>
-                        <td class="tablebody">
-                            <?php echo $row['Question']; ?>
-                        </td>
-                        <td class="tablebody">
-                            <?php echo $row['Answer']; ?>
-                        </td>
-                        <td class="tablebody">
-                            <?php echo $row['DateCreated']; ?>
-                        </td>
-                        <td class="tablebody">
-                            <?php echo $row['Role']; ?>
-                        </td>
-                        <td><a class="btn btn-info" href="update.php?Id=<?php echo $row['Id']; ?>">Edit</a></td>
-                        <td><a class="btn btn-danger" href="delete.php?Id=<?php echo $row['Id']; ?>">Delete</a></td>
-                    </tr>
+                <tbody>
                     <?php
+                    $sql = "SELECT category_questions.Name, questions.Question, questions.Answer, questions.DateCreated, role.Role, questions.Id FROM category_questions, questions, role WHERE questions.Category = category_questions.Id AND role.Id = questions.CreatedBy;";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $row['Name']; ?>
+                                </td>
+                                <td class="tablebody">
+                                    <?php echo $row['Question']; ?>
+                                </td>
+                                <td class="tablebody">
+                                    <?php echo $row['Answer']; ?>
+                                </td>
+                                <td class="tablebody">
+                                    <?php echo $row['DateCreated']; ?>
+                                </td>
+                                <td class="tablebody">
+                                    <?php echo $row['Role']; ?>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="update.php?Id=<?php echo $row['Id']; ?>">Edit</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger" href="delete.php?Id=<?php echo $row['Id']; ?>">Delete</a>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <?php
+                $rowCount = $result->num_rows;
+                $pageSize = 6; // Number of rows per page
+                $totalPages = ceil($rowCount / $pageSize); // Calculate total number of pages
+                
+                // Generate circles for pagination
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    echo '<div class="circle" onclick="updateTableVisibility(' . $i . ')"></div>';
                 }
-            }
-            ?>
-        </tbody>
-        </table>
-        <div class="container">
-            <a class="btn btn-primary" href="user.php">Add Question +</a>
+                ?>
+            </div>
+            <div class="addQuestion">
+                <a class="btn btn-primary backbtn" href="user.php">Add Question +</a>
+                <a class="backbtn" href="../Start-Menu/index.html">Back</a>
+            </div>
         </div>
+
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tableRows = document.querySelectorAll(".table tbody tr");
+            const circles = document.querySelectorAll(".circle");
+            const rowsPerPage = 6; // Number of rows to display per page
+
+            // Function to update the table rows visibility based on the active circle
+            function updateTableVisibility(activeCircle) {
+                const startIndex = (activeCircle - 1) * rowsPerPage;
+                const endIndex = startIndex + rowsPerPage;
+
+                // Hide all rows initially
+                tableRows.forEach(function (row) {
+                    row.style.display = "none";
+                });
+
+                // Show rows within the visible range
+                tableRows.forEach(function (row, index) {
+                    if (index >= startIndex && index < endIndex) {
+                        row.style.display = "";
+                    }
+                });
+            }
+
+            // Attach click event listeners to the circles
+            circles.forEach(function (circle, index) {
+                circle.addEventListener("click", function () {
+                    // Update the active circle and table visibility
+                    circles.forEach(function (c) {
+                        c.classList.remove("active");
+                    });
+                    circle.classList.add("active");
+                    updateTableVisibility(index + 1);
+                });
+            });
+
+            // Activate the first circle and update the table visibility initially
+            circles[0].classList.add("active");
+            updateTableVisibility(1);
+        });
+    </script>
 </body>
 
 </html>
