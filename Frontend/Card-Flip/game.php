@@ -1,5 +1,5 @@
 <?php
-include('../New-question/trivialpursuitRead/config.php');
+include('../New-question/config.php');
 $sql = "SELECT * FROM category_questions, questions, 
         role WHERE questions.Category = category_questions.Id
         AND role.Id = questions.CreatedBy
@@ -40,12 +40,10 @@ while ($Question = $result->fetch_assoc()) {
 
 <body>
   <div class="banner">
-    <div class="navbar">
-      <ul>
-        <li><a href="../Start-Menu/index.html">BACK</a></li>
-      </ul>
-    </div>
+
     <div class="card">
+
+
       <div class="card__inner">
         <div class="card__face card__face--front">
           <div class="card__content">
@@ -66,8 +64,6 @@ while ($Question = $result->fetch_assoc()) {
                     <td>
                       <!--make so the same category does not appear twice -->
                       <?php echo $Question['Name']; ?>
-
-
                     </td>
                     <td>
                       <?php echo $Question['Question']; ?>
@@ -102,13 +98,22 @@ while ($Question = $result->fetch_assoc()) {
                 <?php } ?>
               </table>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="content">
 
-      <a href='game.php'><button type="button"><span></span>NEW GAME</button></a>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div>
+        <a href='game.php'><button type="button"><span></span>NEW GAME</button></a>
+      </div>
+      <div class="navbar">
+        <ul>
+          <li><a href="../Start-Menu/index.html">Back</a>
+          </li>
+        </ul>
+      </div>
     </div>
     <script src="cardflip.js"></script>
 </body>
